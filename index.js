@@ -2,7 +2,7 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const express = require('express');
 
-// ===== Express server to keep Replit alive =====
+// ===== Express server to keep bot alive =====
 const app = express();
 const port = 3000;
 
@@ -52,15 +52,13 @@ client.on('messageReactionAdd', async (reaction, user) => {
     const hasRole = member.roles.cache.some(role => allowedRoles.includes(role.id));
     if (!hasRole) return;
 
-    // Repost the original message as an embed
     const originalMessage = reaction.message;
 
     // If the message already has an embed, clone it
     let embedToSend;
     if (originalMessage.embeds.length > 0) {
-        embedToSend = originalMessage.embeds[0].toJSON(); // clone existing embed
+        embedToSend = originalMessage.embeds[0].toJSON();
     } else {
-        // If no embed, create a simple one
         embedToSend = {
             description: originalMessage.content,
             color: reaction.emoji.name === '✅' ? 0x00FF00 : 0xFF0000,
@@ -84,5 +82,5 @@ client.on('messageReactionAdd', async (reaction, user) => {
     }
 });
 
-// ===== Login with token from Replit Secrets =====
-client.login(process.env.DISCORD_TOKEN);
+// ===== Login with placeholder for GitHub (do NOT push real token) =====
+client.login('YOUR_BOT_TOKEN_HERE');
